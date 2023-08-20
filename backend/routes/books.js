@@ -1,16 +1,37 @@
-import express, { Router } from "express";
+import express from "express";
 import connection from "../database.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  console.log("Connected to the backend");
-  const querry = "SELECT * FROM books.book";
-  const db_res = connection.query(querry, (err, results, fields) => {
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+router.get("/books", (req, res) => {
+  const querry = "SELECT * FROM book";
+  connection.query(querry, (err, results, _) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(results);
+    }
   });
-  console.log(db_res);
+});
+
+router.post("/books", (req, res) => {
+  const querry =
+    "INSERT INTO book (id, name, description, cover, price) VALUES (?, ?, ?, ?, ?)";
+  const values = [
+    null,
+    req.body.name,
+    req.body.description,
+    req.body.cover,
+    req.body.price,
+  ];
+
+  connection.query(querry, values, (err, results, _) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json({ message: "Book has been created successfully" });
+    }
+  });
 });
 
 export default router;
