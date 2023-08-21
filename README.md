@@ -1,8 +1,16 @@
+# CRUD Book Wish List
+
+## Description
+
+## Goals of this project
+
 ## Tech Stack
 
 1. React
 2. Express.js
 3. MySQL
+
+## Stage of the project
 
 ## Steps
 
