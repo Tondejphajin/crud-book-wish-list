@@ -2,15 +2,10 @@ const Add = () => {
   return (
     <div className="form">
       <form action="/" method="POST">
-        <label>Book name</label>
-        <input type="text" name="name"></input>
-        <label>Description</label>
-        <input type="text" name="description"></input>
-        <label>Cover</label>
-        <input type="text" name="cover"></input>
-        <label>Price</label>
-        <input type="number" name="price"></input>
-        <input type="submit" value="Submit"></input>
+        <input type="text" placeholder="name"></input>
+        <input type="text" placeholder="description"></input>
+        <input type="text" placeholder="cover"></input>
+        <input type="number" placeholder="price"></input>
       </form>
     </div>
   );
