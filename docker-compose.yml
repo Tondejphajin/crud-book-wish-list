@@ -1,0 +1,27 @@
+version: "3.8"
+
+volumes:
+  books:
+
+services:
+  backend:
+    build: ./backend
+    container_name: node_container
+    ports:
+      - 3000:3000
+
+  client:
+    build: ./client
+    container_name: react_container
+    ports:
+      - 5173:5173
+
+  database:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    ports:
+      - 3306:3306
+    volumes:
+      - books:/var/lib/mysql
