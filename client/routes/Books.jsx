@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 const Books = () => {
   const [books, setBooks] = useState([]);
 
@@ -19,13 +20,33 @@ const Books = () => {
     fetchAllBooks();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete("http://localhost:3000/books/" + id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const renderBook = (book) => {
     return (
-      <div className="book" key={book.id}>
+      <div className="books__book" key={book.id}>
         {book.cover && <img src={book.cover} alt="" />}
         <h2>{book.name}</h2>
         <p>{book.description}</p>
         <span>{book.price}</span>
+        <button
+          className="books__delete"
+          onClick={() => {
+            handleDelete(book.id);
+          }}
+        >
+          Delete
+        </button>
+        <button className="books__update">
+          <Link to={`/update/${book.id}`}>Update</Link>
+        </button>
       </div>
     );
   };
@@ -40,7 +61,7 @@ const Books = () => {
           }
         })}
       </div>
-      <button>
+      <button className="button">
         <Link to="/add">Add a new book</Link>
       </button>
     </>
