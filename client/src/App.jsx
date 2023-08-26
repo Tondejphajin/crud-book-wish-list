@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Books from "../routes/Books.jsx";
 import Add from "../routes/Add.jsx";
 import Update from "../routes/Update.jsx";
+import "./App.css";
 
 const router = createBrowserRouter([
   {
@@ -13,13 +14,17 @@ const router = createBrowserRouter([
     element: <Add />,
   },
   {
-    path: "/update",
+    path: "/update/:id",
     element: <Update />,
   },
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
+  );
 };
 
 export default App;
